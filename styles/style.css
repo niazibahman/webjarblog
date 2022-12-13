@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'iranyekanSmall';
+    font-weight: 300;
+    src:local('') ,url("../public/Yekan.woff2") format("woff2");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'iranyekan';
+    font-weight: 400;
+    src:local('') ,url("../public/Yekan.woff2") format("woff2");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'iranyekanRegular';
+    font-weight: 500;
+    src:local('') ,url("../public/Yekan.woff2") format("woff2");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'iranyekanBold';
+    font-weight: 700;
+    src:local('') ,url("../public/Yekan.woff2") format("woff2");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'iranyekanUltraBold';
+    font-weight: 800;
+    src:local('') ,url("../public/Yekan.woff2") format("woff2");
+    font-display: swap;
+}
