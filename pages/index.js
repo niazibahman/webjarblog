@@ -32,11 +32,52 @@ export default function Home({ data }) {
     let tempCategoryState=[...categoryState];
     tempCategoryState[index]=!tempCategoryState[index];
     setCategoryState([...tempCategoryState]);
+    let tempdata=[];
+    if(tempCategoryState.includes(true) && tempCategoryState.includes(false)){
+      data.map(x=>{
+        if(tempCategoryState[0]===true){
+          if(x.category.endsWith("a")===true){tempdata.push(x)}
+        }
+        if(tempCategoryState[1]===true){
+          if(x.category.endsWith("b")===true){tempdata.push(x)}
+        }
+        if(tempCategoryState[2]===true){
+          if(x.category.endsWith("c")===true){tempdata.push(x)}
+        }
+        if(tempCategoryState[3]===true){
+          if(x.category.endsWith("d")===true){tempdata.push(x)}
+        }
+        if(tempCategoryState[4]===true){
+          if(x.category.endsWith("1")===true){tempdata.push(x)}
+        }
+      });
+      setDataSource(tempdata);
+      setTotalPage(Math.ceil(tempdata.length/5));
+      setDataForShow(tempdata.slice(0,5));
+    }else{
+      setDataSource(data);
+      setTotalPage(Math.ceil(data.length/5));
+      setDataForShow(data.slice(0,5));
+    }
   };
 
   const changePageNumberHandler=(index)=>{
     setCurrentPage(index);
     setDataForShow(dataSource.slice(index,(index+5)));
+  };
+
+  const changeSearchHandler=(e)=>{
+    if(e.target.value !== ""){
+      let tempData=[];
+      dataSource.map(x=>{
+        if(x.body.includes(e.target.value) === true){
+          tempData.push(x);
+        }
+      });
+      setDataSource(tempData);
+      setTotalPage(Math.ceil(tempData.length/5))
+      setDataForShow(tempData.slice(0,5))
+    }
   };
   
   return (
@@ -53,7 +94,7 @@ export default function Home({ data }) {
           <span className='text-greenAccent'>وبلاگ</span>
         </div>
         <h1 className='font-yekanUltraBold text-34px my-4 text-black'>وبلاگ</h1>
-        <TextField className='drop-shadow-search w-80 md:w-96 rounded-15px caret-greenAccent' variant="outlined" type="search" placeholder='جستجو کنید ...'
+        <TextField onChange={changeSearchHandler} className='drop-shadow-search w-80 md:w-96 rounded-15px caret-greenAccent' variant="outlined" type="search" placeholder='جستجو کنید ...'
            InputProps={{
              style:{borderColor:'red',borderRadius:'15px',backgroundColor:'white',height:'40px'},
              startAdornment: (
@@ -98,15 +139,15 @@ export default function Home({ data }) {
             {
               totalPage > 1?
               <div className='col-span-3 col-end-5 flex flex-row items-center justify-center'>
-                <span className='w-8 h-8 rounded-15px bg-white flex flex-col justify-center items-center'>
+                <button onClick={currentPage===totalPage?()=>{}:()=>changePageNumberHandler(currentPage+1)} className='w-8 h-8 rounded-15px bg-white flex flex-col justify-center items-center'>
                   <ArrowForwardIosOutlined color='success'/>
-                </span>
+                </button>
                 {
                   Array(totalPage).fill(true).map((x,index)=><button onClick={()=>changePageNumberHandler((totalPage-index))} key={index} className={`w-8 h-8 rounded-15px flex flex-col justify-center items-center ${(totalPage-index) === currentPage?"bg-greenAccent text-white":"bg-white text-greenAccent"}`}>{totalPage-index}</button>)
                 }
-                <span className='w-8 h-8 rounded-15px bg-white flex flex-col justify-center items-center'>
+                <button onClick={currentPage===1?()=>{}:()=>changePageNumberHandler(currentPage-1)} className='w-8 h-8 rounded-15px bg-white flex flex-col justify-center items-center'>
                   <ArrowBackIosNewOutlined color='success'/>
-                </span>
+                </button>
               </div>:null
             }
            </div>
