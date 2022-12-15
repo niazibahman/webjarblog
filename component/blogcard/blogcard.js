@@ -8,11 +8,11 @@ export default function BlogCard({data}){
         <div className="col-span-1 rounded-r-15px">
             <img src={data.introImageUrl.host.concat(data.introImageUrl.path)} alt={data.title} className="rounded-r-15px"/>
         </div>
-        <div className=" col-span-3 h-48 flex flex-row">
+        <div className=" col-span-3 h-44 flex flex-row">
             <div className="w-4/5 flex flex-col justify-between">
-                <h2 className="font-yekanRegular mb-2">{data.title}</h2>
-                <div dangerouslySetInnerHTML={{ __html: data.body }} className="text-sm h-full overflow-y-hidden"></div>
-                <div className="flex flex-row items-center justify-around text-xs">
+                <h2 className="font-yekanRegular mb-2 text-black37">{data.title}</h2>
+                <div dangerouslySetInnerHTML={{ __html: data.body }} className="text-sm h-full overflow-y-hidden text-black37"></div>
+                <div className="flex flex-row items-center justify-between text-black text-sm">
                     <div className="flex flex-row items-center">
                         <CalendarTodayOutlined className="w-5 h-5 ml-1"/>
                         <span>{persianDate}</span>
