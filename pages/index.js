@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import { Search } from '@mui/icons-material';
 import axios from 'axios';
 import { useEffect } from 'react';
+import BlogCard from '../component/blogcard/blogcard';
 
 
 export async function getStaticProps(){
@@ -44,6 +45,15 @@ export async function getStaticProps(){
                </InputAdornment>
             ),
            }}/>
+           <div className='w-full grid grid-cols-1 lg:grid-cols-4 lg:gap-4 my-4'>
+            <div className='col-span-1 col-start-1'>
+            </div>
+            <div className='col-span-3'>
+              {
+                data.map(x=><BlogCard data={x}/>)
+              }
+            </div>
+           </div>
         </div>
       </main>
     </div>
