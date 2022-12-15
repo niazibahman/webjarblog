@@ -5,6 +5,7 @@ import { Search } from '@mui/icons-material';
 import axios from 'axios';
 import BlogCard from '../component/blogcard/blogcard';
 import { useState } from 'react';
+import { ArrowBackIosNewOutlined,ArrowForwardIosOutlined,Person2Outlined } from '@mui/icons-material';
 
 
 export async function getStaticProps(){
@@ -22,11 +23,20 @@ export async function getStaticProps(){
 
 export default function Home({ data }) {
   const [categoryState,setCategoryState]=useState([false,false,false,false,false]);
+  const [dataSource,setDataSource]=useState(data)
+  const [dataForShow,setDataForShow]=useState(dataSource.slice(0,5))
+  const [totalPage,setTotalPage]=useState(Math.ceil(dataSource.length/5))
+  const [currentPage,setCurrentPage]=useState(1);
 
   const changeCategoryStateHandler=(index)=>{
     let tempCategoryState=[...categoryState];
     tempCategoryState[index]=!tempCategoryState[index];
     setCategoryState([...tempCategoryState]);
+  };
+
+  const changePageNumberHandler=(index)=>{
+    setCurrentPage(index);
+    setDataForShow(dataSource.slice(index,(index+5)));
   };
   
   return (
@@ -56,7 +66,7 @@ export default function Home({ data }) {
             <div className='col-span-1 col-start-1'>
               <div className='w-full flex flex-col'>
                 <span className='font-yekanBold text-md text-black37'>دسته بندی</span>
-                <div className='flex flex-row lg:flex-col text-sm md:text-base whitespace-nowrap'>
+                <div className='flex flex-row lg:flex-col text-sm md:text-base'>
                   <div className='w-full pl-4 flex flex-row items-center lg:justify-between lg:my-1'>
                     <label form='computerCHK' className='text-grayText'>کامپیوتر</label>
                     <input id='computerCHK' onChange={()=>changeCategoryStateHandler(0)} checked={categoryState[0]} type="checkbox"  className="accent-greenAccent w-4 h-4 cursor-pointer mx-2"/>
@@ -82,9 +92,23 @@ export default function Home({ data }) {
             </div>
             <div className='col-span-3'>
               {
-                data.map(x=><BlogCard data={x}/>)
+                dataForShow.map(x=><BlogCard data={x}/>)
               }
             </div>
+            {
+              totalPage > 1?
+              <div className='col-span-3 col-end-5 flex flex-row items-center justify-center'>
+                <span className='w-8 h-8 rounded-15px bg-white flex flex-col justify-center items-center'>
+                  <ArrowForwardIosOutlined color='success'/>
+                </span>
+                {
+                  Array(totalPage).fill(true).map((x,index)=><button onClick={()=>changePageNumberHandler((totalPage-index))} key={index} className={`w-8 h-8 rounded-15px flex flex-col justify-center items-center ${(totalPage-index) === currentPage?"bg-greenAccent text-white":"bg-white text-greenAccent"}`}>{totalPage-index}</button>)
+                }
+                <span className='w-8 h-8 rounded-15px bg-white flex flex-col justify-center items-center'>
+                  <ArrowBackIosNewOutlined color='success'/>
+                </span>
+              </div>:null
+            }
            </div>
         </div>
       </main>

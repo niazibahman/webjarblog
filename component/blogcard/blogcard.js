@@ -4,9 +4,9 @@ export default function BlogCard({data}){
     let publishDate = new Date(Date.parse(data.createdAt));
     let persianDate= publishDate.toLocaleDateString('fa-IR');
 
-    return(<div className="w-full grid grid-cols-4 gap-2 rounded-15px bg-white my-2">
+    return(<div className="w-full grid grid-cols-4 gap-2 rounded-15px bg-white my-4">
         <div className="col-span-1 rounded-r-15px">
-            <img src={data.introImageUrl.host.concat(data.introImageUrl.path)} alt={data.title} className="rounded-r-15px"/>
+            <img src={data.introImageUrl.host.concat(data.introImageUrl.path)} alt={data.title} className="rounded-r-15px h-44"/>
         </div>
         <div className=" col-span-3 h-44 flex flex-row">
             <div className="w-4/5 flex flex-col justify-between">

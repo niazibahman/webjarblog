@@ -1,4 +1,4 @@
-export default function Header(){
+export default function Header(props){
     return(
         <div className="w-full bg-white drop-shadow-header">
             <header className="lg:container px-4 lg:px-0 flex flex-row justify-between items-center h-24 mx-auto">
@@ -11,7 +11,7 @@ export default function Header(){
                         <li className="text-greenAccent cursor-pointer ml-8 lg:ml-12 border-b-2 border-greenAccent">وبلاگ</li>
                     </ul>
                 </nav>
-                <button className="text-greenAccent bg-white border border-greenAccent rounded-15px text-center px-6 py-3 hover:drop-shadow-xmd">ورود</button>
+                <button onClick={props.click} className="text-greenAccent bg-white border border-greenAccent rounded-15px text-center px-6 py-3 hover:drop-shadow-xmd">ورود</button>
             </header>
         </div>
     );

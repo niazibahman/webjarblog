@@ -29,6 +29,11 @@ module.exports = {
       '15px': '15px',
     },
     extend: {
+      zIndex: {
+        '7000': '7000',
+        '7100':'7100',
+        '7200':'7200'
+      },
       dropShadow: {
         'xmd': '0 5px 10px rgba(0, 200, 83, 0.25)',
         'header':'0px 0px 40px rgba(0, 0, 0, 0.05)',
